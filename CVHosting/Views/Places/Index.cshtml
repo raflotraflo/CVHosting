@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Repository.Models.Place>
+
+@{
+    ViewBag.Title = "Lista miejsc - metaTitle - do 60 znaków";
+    ViewBag.Opis = "Lista miejsc informacyjnych o pracy";
+    ViewBag.SlowaKluczowe = "Lista miejsc, słowa kluczowe, keywords";
+}
+
+<h2>List miejsc "Skąd o nas się dowiedziałeś?"</h2>
+
+<p>
+    @Html.ActionLink("Dodaj", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @*@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))*@
+            @if (User.Identity.IsAuthenticated)
+                {
+                @: |
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
+
+                @: |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            }
+        </td>
+
+    </tr>
+}
+
+</table>

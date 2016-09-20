@@ -12,71 +12,71 @@ using Repository.Logging;
 
 namespace CVHosting.Controllers
 {
-    public class AvailabilitiesController : Controller
+    public class PlacesController : Controller
     {
-        private IAvailabilityRepo _availabilityRepo;
+        private IPlaceRepo _availabilityRepo;
         private ILogger _logger;
 
-        public AvailabilitiesController(IAvailabilityRepo availabilityRepo, ILogger logger)
+        public PlacesController(IPlaceRepo availabilityRepo, ILogger logger)
         {
             _availabilityRepo = availabilityRepo;
             _logger = logger;
         }
 
-        // GET: Availabilities
+        // GET: Places
         public ActionResult Index()
         {
-            return View(_availabilityRepo.GetAllAvailability().ToList());
+            return View(_availabilityRepo.GetAllPlace().ToList());
         }
 
-        // GET: Availabilities/Details/5
+        // GET: Places/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Availability availability = _availabilityRepo.GetAvailabilityBuId((int)id);
-            if (availability == null)
+            Place place = _availabilityRepo.GetPlaceBuId((int)id);
+            if (place == null)
             {
                 return HttpNotFound();
             }
-            return View(availability);
+            return View(place);
         }
 
-        // GET: Availabilities/Create
+        // GET: Places/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Availabilities/Create
+        // POST: Places/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name")] Availability availability)
+        public ActionResult Create([Bind(Include = "Name")] Place place)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _availabilityRepo.AddAvailability(availability);
+                    _availabilityRepo.AddPlace(place);
                     _availabilityRepo.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    _logger.FatalFormat("Error in create availability, Ex: ", ex.ToString());
-                    return View(availability);
+                    _logger.FatalFormat("Error in create place, Ex: ", ex.ToString());
+                    return View(place);
                 }
             }
 
-            return View(availability);
+            return View(place);
         }
 
-        // GET: Availabilities/Edit/5
+        // GET: Places/Edit/5
         [Authorize]
         public ActionResult Edit(int? id)
         {
@@ -84,46 +84,46 @@ namespace CVHosting.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Availability availability = _availabilityRepo.GetAvailabilityBuId((int)id);
-            if (availability == null)
+            Place place = _availabilityRepo.GetPlaceBuId((int)id);
+            if (place == null)
             {
                 return HttpNotFound();
             }
-            return View(availability);
+            return View(place);
         }
 
-        // POST: Availabilities/Edit/5
+        // POST: Places/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Availability availability)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Place place)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _availabilityRepo.UpdateAvailability(availability);
+                    _availabilityRepo.UpdatePlace(place);
                     _availabilityRepo.SaveChanges();
                 }
                 catch (Exception ex)
                 {
-                    _logger.FatalFormat("Error in edit availability, Ex: ", ex.ToString());
-                    return View(availability);
+                    _logger.FatalFormat("Error in edit place, Ex: ", ex.ToString());
+                    return View(place);
                 }
             }
-            return RedirectToAction("Details", new { id = availability.Id});
+            return RedirectToAction("Details", new { id = place.Id });
         }
 
-        // GET: Availabilities/Delete/5
+        // GET: Places/Delete/5
         public ActionResult Delete(int? id, bool? error)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Availability availability = _availabilityRepo.GetAvailabilityBuId((int)id);
-            if (availability == null)
+            Place place = _availabilityRepo.GetPlaceBuId((int)id);
+            if (place == null)
             {
                 return HttpNotFound();
             }
@@ -131,35 +131,27 @@ namespace CVHosting.Controllers
             if (error != null)
                 ViewBag.Error = true;
 
-            return View(availability);
+            return View(place);
         }
 
-        // POST: Availabilities/Delete/5
+        // POST: Places/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
-        {       
+        {
             try
             {
-                _availabilityRepo.DeleteAvailability(id);
+                _availabilityRepo.DeletePlace(id);
                 _availabilityRepo.SaveChanges();
             }
             catch (Exception ex)
             {
-                _logger.FatalFormat("Error in edit availability, Ex: ", ex.ToString());
+                _logger.FatalFormat("Error in delete place, Ex: ", ex.ToString());
                 RedirectToAction("Delete", new { id = id, error = true });
             }
 
             return RedirectToAction("Index");
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

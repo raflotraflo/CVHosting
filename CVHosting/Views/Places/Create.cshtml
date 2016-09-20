@@ -1,37 +1,22 @@
-﻿@model Repository.Models.Availability
+﻿@model Repository.Models.Place
 
 @{
-    ViewBag.Title = "Edycja dostępności - metaTitle - do 60 znaków";
-    ViewBag.Opis = "Edycja dostępności";
-    ViewBag.SlowaKluczowe = "Dodaj dostępności, słowa kluczowe, keywords";
+    ViewBag.Title = "Dodaj Miejsce - metaTitle - do 60 znaków";
+    ViewBag.Opis = "Dodaj miejsce";
+    ViewBag.SlowaKluczowe = "Dodaj miejsce, słowa kluczowe, keywords";
 }
 
-<h2>Edytujesz wpis nr: @Model.Id</h2>
-
-@if (ViewBag.Blad == true)
-{
-    <div class="alert-danger" role="alert">
-        Wystapił błąd podczas edycji
-    </div>
-}
-else if (ViewBag.Blad == false)
-{
-    <div class="alert-success" role="alert">
-        Wykonano poprawnie
-    </div>
-}
+<h2>Dodaj miejsce "Skąd o nas się dowiedziałeś?"<</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Availability</h4>
+        <h4>Place</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -42,14 +27,14 @@ else if (ViewBag.Blad == false)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zapisz" class="btn btn-success" />
+                <input type="submit" value="Dodaj" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Powrót do listy", "Index", null, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-warning" })
 </div>
 
 @section Scripts {
