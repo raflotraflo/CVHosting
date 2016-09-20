@@ -29,10 +29,9 @@
                 @*@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))*@
                 @if (User.Identity.IsAuthenticated)
                 {
-                    @Html.DisplayText(" | ")
                     @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
 
-                    @Html.DisplayText(" | ")
+                    @: |
                     @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 }
             </td>

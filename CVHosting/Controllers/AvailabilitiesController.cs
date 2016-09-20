@@ -26,6 +26,7 @@ namespace CVHosting.Controllers
         // GET: Availabilities
         public ActionResult Index()
         {
+            _logger.Trace("wysiwetlenei strony ActionResult");
             return View(_availabilityRepo.GetAllAvailability().ToList());
         }
 
