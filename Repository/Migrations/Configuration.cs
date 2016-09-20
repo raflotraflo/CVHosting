@@ -11,6 +11,7 @@ namespace Repository.Migrations
     using System.Collections.Generic;
     using System.Web.Hosting;
     using System.Reflection;
+
     internal sealed class Configuration : DbMigrationsConfiguration<Repository.Models.CVHostingContext>
     {
         public Configuration()
@@ -89,7 +90,7 @@ namespace Repository.Migrations
         private void SeedAvailability(CVHostingContext context)
         {
             List<string> availabilityNames = new List<string>() { "Do 20h tygodniowo", "20h tygodniowo",
-                "21h - 29h tygodniowo", "30h - 39h tygodniowo", "Pe≥en etat (40h)" };
+                "21h - 29h tygodniowo", "30h - 39h tygodniowo", "Pe≈Çen etat (40h)" };
 
             foreach (var name in availabilityNames)
             {
@@ -102,8 +103,8 @@ namespace Repository.Migrations
 
         private void SeedPlace(CVHostingContext context)
         {
-            List<string> placeNames = new List<string>() { "Z og≥oszenia", "Od pracownika HeadChannel", "Z bloga technicznego",
-                "Ze strony www", "Z mediÛw spo≥ecznoúciowych", "Z uczelni", "Z wczeúniejszej rekrutacji", "Inne ürÛd≥o" };
+            List<string> placeNames = new List<string>() { "Z og≈Çoszenia", "Od pracownika HeadChannel", "Z bloga technicznego",
+                "Ze strony www", "Z medi√≥w spo≈Çeczno≈õciowych", "Z uczelni", "Z wcze≈õniejszej rekrutacji", "Inne ≈∫r√≥d≈Ço" };
 
             foreach (var name in placeNames)
             {
@@ -128,7 +129,7 @@ namespace Repository.Migrations
                 DataDodania = DateTime.Now,
                 Description = "Dodatkowy opis",
                 Email = "rafal.chodzidlo92@gmail.com",
-                Name = "Rafa≥ Chodzid≥o",
+                Name = "Rafa≈Ç Chodzid≈Ço",
                 Phone = "530529985",
                 Workplace = "ASP.NET",
                 CVFileId = cvFileId

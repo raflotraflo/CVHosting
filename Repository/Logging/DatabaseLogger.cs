@@ -14,134 +14,168 @@ namespace Repository.Logging
 
         public DatabaseLogger()
         {
-            _db = new LoggerContext();
+            _db = new CVHostingContext();
         }
 
-        private void AddMessage(string message)
+        private void AddMessage(string message, string type)
         {
-            MessageLog msg = new MessageLog() { Excepction = message };
+                MessageLog msg = new MessageLog() { Excepction = message, Type = type };
+                _db.MessageLog.Add(msg);
+                _db.SaveChanges();
+        }
+
+        private void AddMessage(string message, Exception ex, string type)
+        {
+            MessageLog msg = new MessageLog()
+            {
+                Excepction = message + " Exception: " + ex.ToString(),
+                Path = ex.Source,
+                Type = type
+            };
             _db.MessageLog.Add(msg);
             _db.SaveChanges();
         }
 
         public void Debug(string message)
         {
-            throw new NotImplementedException();
+            AddMessage(message, "Debug");
         }
 
         public void Debug(string message, Exception exception)
         {
-            throw new NotImplementedException();
+            AddMessage(message, exception, "Debug");
         }
 
         public void DebugFormat(string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, "Debug");
         }
 
         public void DebugFormat(Exception exception, string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, exception, "Debug");
         }
 
         public void Error(string message)
         {
-            throw new NotImplementedException();
+            AddMessage(message, "Error");
         }
 
         public void Error(string message, Exception exception)
         {
-            throw new NotImplementedException();
+            AddMessage(message, exception, "Debug");
         }
 
         public void ErrorFormat(string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, "Debug");
         }
 
         public void ErrorFormat(Exception exception, string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, exception, "Error");
         }
 
         public void Fatal(string message)
         {
-            throw new NotImplementedException();
+            AddMessage(message, "Fatal");
         }
 
         public void Fatal(string message, Exception exception)
         {
-            throw new NotImplementedException();
+            AddMessage(message, exception, "Fatal");
         }
 
         public void FatalFormat(string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, "Fatal");
         }
 
         public void FatalFormat(Exception exception, string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, exception, "Fatal");
         }
 
         public void Info(string message)
         {
-            throw new NotImplementedException();
+            AddMessage(message, "Info");
         }
 
         public void Info(string message, Exception exception)
         {
-            throw new NotImplementedException();
+            AddMessage(message, exception, "Fatal");
         }
 
         public void InfoFormat(string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, "Info");
         }
 
         public void InfoFormat(Exception exception, string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, exception, "Info");
         }
 
         public void Trace(string message)
         {
-            throw new NotImplementedException();
+            AddMessage(message, "Trace");
         }
 
         public void Trace(string message, Exception exception)
         {
-            throw new NotImplementedException();
+            AddMessage(message, exception, "Fatal");
         }
 
         public void TraceCurrentMethod(string message)
         {
-            throw new NotImplementedException();
+            AddMessage(message, "Trace");
         }
 
         public void TraceFormat(string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, "Trace");
         }
 
         public void Warning(string message)
         {
-            throw new NotImplementedException();
+            AddMessage(message, "Warning");
         }
 
         public void Warning(string message, Exception exception)
         {
-            throw new NotImplementedException();
+            AddMessage(message, exception, "Warning");
         }
 
         public void WarningFormat(string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, "Warning");
         }
 
         public void WarningFormat(Exception exception, string format, params object[] args)
         {
-            throw new NotImplementedException();
+            string message = "";
+            args.ToList().ForEach(x => message += x.ToString());
+            AddMessage(message, exception, "Warning");
         }
     }
 }

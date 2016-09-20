@@ -8,7 +8,7 @@ using Repository.IRepo;
 
 namespace Repository.Models
 {
-    public class CVHostingContext : IdentityDbContext, ICVHostingContext
+    public class CVHostingContext : IdentityDbContext, ICVHostingContext, ILoggerContext
     {
         public CVHostingContext()
             : base("DefaultConnection")
@@ -24,6 +24,7 @@ namespace Repository.Models
         public DbSet<CVFile> CVFile { get; set; }
         public DbSet<Place> Place { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<MessageLog> MessageLog { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
