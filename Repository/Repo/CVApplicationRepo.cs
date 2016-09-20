@@ -25,5 +25,10 @@ namespace Repository.Repo
         {
             return _db.CVFile.Find(id);
         }
+
+        public void SaveChanges()
+        {
+            _db.SaveChanges();
+        }
     }
 }

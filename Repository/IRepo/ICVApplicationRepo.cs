@@ -11,5 +11,8 @@ namespace Repository.IRepo
     {
         IQueryable<CVApplication> GetAllCVs();
         CVFile GetCVFileById(int id);
+
+
+        void SaveChanges();
     }
 }

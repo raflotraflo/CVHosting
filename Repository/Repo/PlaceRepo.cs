@@ -21,6 +21,12 @@ namespace Repository.Repo
             _db.Place.Add(place);
         }
 
+        public void DeletePlace(int id)
+        {
+            var toDelete = _db.Place.Find(id);
+            _db.Place.Remove(toDelete);
+        }
+
         public IQueryable<Place> GetAllPlace()
         {
             return _db.Place.AsNoTracking();
@@ -29,6 +35,16 @@ namespace Repository.Repo
         public Place GetPlaceBuId(int id)
         {
             return _db.Place.Find(id);
+        }
+
+        public void SaveChanges()
+        {
+            _db.SaveChanges();
+        }
+
+        public void UpdatePlace(Place place)
+        {
+            _db.Entry(place).State = System.Data.Entity.EntityState.Modified;
         }
     }
 }

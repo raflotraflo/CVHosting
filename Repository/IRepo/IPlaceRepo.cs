@@ -11,5 +11,9 @@ namespace Repository.IRepo
         IQueryable<Place> GetAllPlace();
         Place GetPlaceBuId(int id);
         void AddPlace(Place place);
+        void UpdatePlace(Place place);
+        void DeletePlace(int id);
+
+        void SaveChanges();
     }
 }

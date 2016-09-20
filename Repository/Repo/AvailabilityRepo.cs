@@ -21,6 +21,12 @@ namespace Repository.Repo
             _db.Availability.Add(availability);
         }
 
+        public void DeleteAvailability(int id)
+        {
+            var toDelete = _db.Availability.Find(id);
+            _db.Availability.Remove(toDelete);
+        }
+
         public IQueryable<Availability> GetAllAvailability()
         {
             return _db.Availability.AsNoTracking();
@@ -29,6 +35,16 @@ namespace Repository.Repo
         public Availability GetAvailabilityBuId(int id)
         {
             return _db.Availability.Find(id);
+        }
+
+        public void SaveChanges()
+        {
+            _db.SaveChanges();
+        }
+
+        public void UpdateAvailability(Availability availability)
+        {
+            _db.Entry(availability).State = System.Data.Entity.EntityState.Modified;
         }
     }
 }
