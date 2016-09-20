@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Repository.Models.Availability>
+
+@{
+    ViewBag.Title = "Lista dostępności - metaTitle - do 60 znaków";
+    ViewBag.Opis = "Lista dostępności w pracy";
+    ViewBag.SlowaKluczowe = "Lista dostępności, słowa kluczowe, keywords";
+}
+
+<h2>Lista dostępności</h2>
+
+<p>
+    @Html.ActionLink("Dodaj", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @*@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))*@
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.DisplayText(" | ")
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
+
+                    @Html.DisplayText(" | ")
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>
