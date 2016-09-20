@@ -5,6 +5,7 @@ using CVHosting.Controllers;
 using Repository.Models;
 using Repository.IRepo;
 using Repository.Repo;
+using Repository.Logging;
 
 namespace CVHosting.App_Start
 {
@@ -43,9 +44,12 @@ namespace CVHosting.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<ManageController>(new InjectionConstructor());
+            container.RegisterType<ICVHostingContext, CVHostingContext>(new PerRequestLifetimeManager());
+            container.RegisterType<ILogger, DatabaseLogger>(new PerRequestLifetimeManager());
+
             container.RegisterType<ICVApplicationRepo, CVApplicationRepo>(new PerRequestLifetimeManager());
-            //container.RegisterType<IKatagoriaRep, KatagoriaRepo>(new PerRequestLifetimeManager());
-            //container.RegisterType<IOglContext, OglContext>(new PerRequestLifetimeManager());
+            container.RegisterType<IAvailabilityRepo, AvailabilityRepo>(new PerRequestLifetimeManager());
+            container.RegisterType<IPlaceRepo, PlaceRepo>(new PerRequestLifetimeManager());
         }
     }
 }
