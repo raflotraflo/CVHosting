@@ -68,7 +68,7 @@ namespace CVHosting.Controllers
                 }
                 catch (Exception ex)
                 {
-                    _logger.FatalFormat("Error in create place, Ex: ", ex.ToString());
+                    _logger.FatalFormat(ex, "Error in create place");
                     return View(place);
                 }
             }
@@ -108,7 +108,7 @@ namespace CVHosting.Controllers
                 }
                 catch (Exception ex)
                 {
-                    _logger.FatalFormat("Error in edit place, Ex: ", ex.ToString());
+                    _logger.FatalFormat(ex, "Error in edit place");
                     return View(place);
                 }
             }
@@ -146,7 +146,7 @@ namespace CVHosting.Controllers
             }
             catch (Exception ex)
             {
-                _logger.FatalFormat("Error in delete place, Ex: ", ex.ToString());
+                _logger.FatalFormat(ex, "Error in delete place");
                 RedirectToAction("Delete", new { id = id, error = true });
             }
 

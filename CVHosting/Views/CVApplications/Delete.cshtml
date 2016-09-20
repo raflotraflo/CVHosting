@@ -1,0 +1,115 @@
+﻿@model Repository.Models.CVApplication
+
+@{
+    ViewBag.Title = "Usuń aplikację nr: " + Model.Id;
+    ViewBag.Opis = "Usuń aplikację nr: " + Model.Id + "Opis dla Google";
+    ViewBag.SlowaKluczowe = "Usuń aplikację, słowa kluczowe, keywords";
+}
+
+<h2>Usuń aplikację od @Model.Name</h2>
+
+@if (ViewBag.Blad == true)
+{
+    <div class="alert-danger" role="alert">
+        Wytąpił błąd podczas usuwania, <br />
+        spróbuj ponownie.
+    </div>
+}
+
+<h3>Czy na pewno chcesz usunąc wpis?</h3>
+<div>
+    <h4>Podanie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Availability.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Availability.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Place.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Place.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Workplace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workplace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDodania)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDodania)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CVFileId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CVFileId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-danger" /> |
+            @Html.ActionLink("Powrót do listy", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $('.confirmation').on('click', function () {
+            return confirm('Czy na pewno chcesz usunąć?');
+        });
+    </script>
+}

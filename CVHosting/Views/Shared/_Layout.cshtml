@@ -24,10 +24,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li>@Html.ActionLink("Dodaj CV", "Index", "Availabilities")</li>
+                    <li>@Html.ActionLink("Dodaj CV", "Index", "Index")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Lista CV", "Create", "Availabilities")</li>
+                        <li>@Html.ActionLink("Lista CV", "Index", "CVApplications")</li>
                     }
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kategorie <span class="caret"></span></a>
