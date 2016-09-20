@@ -9,14 +9,21 @@ namespace Repository.Repo
 {
     public class CVApplicationRepo : ICVApplicationRepo
     {
+        private ICVHostingContext _db;
+
+        public CVApplicationRepo(ICVHostingContext db)
+        {
+            _db = db;
+        }
+
         public IQueryable<CVApplication> GetAllCVs()
         {
-            throw new NotImplementedException();
+            return _db.CVApplication.AsNoTracking();
         }
 
         public CVFile GetCVFileById(int id)
         {
-            throw new NotImplementedException();
+            return _db.CVFile.Find(id);
         }
     }
 }
