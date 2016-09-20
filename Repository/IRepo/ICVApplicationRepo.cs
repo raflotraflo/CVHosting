@@ -10,6 +10,12 @@ namespace Repository.IRepo
     public interface ICVApplicationRepo
     {
         IQueryable<CVApplication> GetAllCVs();
+        CVApplication GetCVApplicationById(int id);
+        void AddCVApplication(CVApplication app);
+        void UpdateCVApplication(CVApplication app);
+        void DeleteCVApplication(int id);
+
+
         CVFile GetCVFileById(int id);
 
 

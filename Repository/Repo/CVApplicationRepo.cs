@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Repository.IRepo;
@@ -16,9 +17,26 @@ namespace Repository.Repo
             _db = db;
         }
 
+        public void AddCVApplication(CVApplication app)
+        {
+            _db.CVApplication.Add(app);
+        }
+
+        public void DeleteCVApplication(int id)
+        {
+            //TODO rch - uusunąć plik z bazy 
+            var toDelete = _db.CVApplication.Find(id);
+            _db.CVApplication.Remove(toDelete);
+        }
+
         public IQueryable<CVApplication> GetAllCVs()
         {
-            return _db.CVApplication.AsNoTracking();
+            return _db.CVApplication.Include(c => c.Availability).Include(c => c.Place).AsNoTracking();
+        }
+
+        public CVApplication GetCVApplicationById(int id)
+        {
+            return _db.CVApplication.Find(id);
         }
 
         public CVFile GetCVFileById(int id)
@@ -29,6 +47,11 @@ namespace Repository.Repo
         public void SaveChanges()
         {
             _db.SaveChanges();
+        }
+
+        public void UpdateCVApplication(CVApplication app)
+        {
+            _db.Entry(app).State = System.Data.Entity.EntityState.Modified;
         }
     }
 }

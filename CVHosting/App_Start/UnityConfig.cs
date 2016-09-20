@@ -50,6 +50,7 @@ namespace CVHosting.App_Start
             container.RegisterType<ICVApplicationRepo, CVApplicationRepo>(new PerRequestLifetimeManager());
             container.RegisterType<IAvailabilityRepo, AvailabilityRepo>(new PerRequestLifetimeManager());
             container.RegisterType<IPlaceRepo, PlaceRepo>(new PerRequestLifetimeManager());
+            container.RegisterType<ICVApplicationRepo, CVApplicationRepo>(new PerRequestLifetimeManager());
         }
     }
 }
