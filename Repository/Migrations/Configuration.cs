@@ -11,7 +11,7 @@ namespace Repository.Migrations
     using System.Collections.Generic;
     using System.Web.Hosting;
     using System.Reflection;
-
+    using System.Web;
     internal sealed class Configuration : DbMigrationsConfiguration<Repository.Models.CVHostingContext>
     {
         public Configuration()
@@ -143,10 +143,18 @@ namespace Repository.Migrations
         private void SeedFile(CVHostingContext context)
         {
             var fileStream = GetResourceFileStream("Repository.Files", "CV_RAFAL_CHODZIDLO_ENG.pdf");
+            int contentLength = (int) fileStream.Length;
+            string contentType = MimeMapping.GetMimeMapping("someFileName.pdf");
 
             byte[] file = ReadToEnd(fileStream);
 
-            CVFile cvFile = new CVFile() { Content = file };
+            CVFile cvFile = new CVFile()
+            {
+                Content = file,
+                FileName = "CV_RAFAL_CHODZIDLO_ENG.pdf",
+                ContentLength = contentLength,
+                ContentType = contentType
+            };
 
             context.Set<CVFile>().AddOrUpdate(cvFile);
             context.SaveChanges();
@@ -154,6 +162,7 @@ namespace Repository.Migrations
 
         public static Stream GetResourceFileStream(String nameSpace, String filePath)
         {
+            //TODO rch zmienić to na extensions
             String pseduoName = filePath.Replace('\\', '.');
             Assembly assembly = Assembly.GetExecutingAssembly();
             return assembly.GetManifestResourceStream(nameSpace + "." + pseduoName);
