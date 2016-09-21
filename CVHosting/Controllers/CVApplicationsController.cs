@@ -59,6 +59,7 @@ namespace CVHosting.Controllers
             //ViewBag.AvailabilityId = new SelectList(db.Availability, "Id", "Name");
             //ViewBag.PlaceId = new SelectList(db.Place, "Id", "Name");
 
+
             ViewBag.AvailabilityId = new SelectList(availabilityList, "Id", "Name");
             ViewBag.PlaceId = new SelectList(placeList, "Id", "Name");
             return View();
@@ -75,9 +76,27 @@ namespace CVHosting.Controllers
             {
                 try
                 {
-                    _cvApplicationsRepo.AddCVApplication(cVApplication);
-                    _cvApplicationsRepo.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        var file = new CVFile
+                        {
+                            FileName = System.IO.Path.GetFileName(upload.FileName),
+                            ContentType = upload.ContentType,
+                            ContentLength = upload.ContentLength
+                        };
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        {
+                            file.Content = reader.ReadBytes(upload.ContentLength);
+                        }
+
+                        int fileID = _cvApplicationsRepo.AddCVFile(file);
+
+                        cVApplication.CVFileId = fileID;
+
+                        _cvApplicationsRepo.AddCVApplication(cVApplication);
+                        _cvApplicationsRepo.SaveChanges();
+                        return RedirectToAction("Index");
+                    } 
                 }
                 catch (Exception ex)
                 {
