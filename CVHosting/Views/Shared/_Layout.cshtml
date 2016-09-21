@@ -24,7 +24,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li>@Html.ActionLink("Dodaj CV", "Index", "Index")</li>
+                    <li>@Html.ActionLink("Dodaj CV", "Create", "CVApplications")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Lista CV", "Index", "CVApplications")</li>

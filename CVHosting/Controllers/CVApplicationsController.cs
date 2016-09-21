@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Repository.Models;
 using Repository.IRepo;
 using Repository.Logging;
+using Repository.Models.Views;
 
 namespace CVHosting.Controllers
 {
@@ -70,8 +71,11 @@ namespace CVHosting.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Workplace,Name,Email,PlaceId,AvailabilityId")] CVApplication cVApplication, HttpPostedFileBase upload)
+        public ActionResult Create(CreateCVApplicationViewModel createCVApplicationViewModel)
         {
+            CVApplication cVApplication = createCVApplicationViewModel.cvApplication;
+            HttpPostedFileBase upload = createCVApplicationViewModel.File;
+
             if (ModelState.IsValid)
             {
                 try
@@ -107,7 +111,7 @@ namespace CVHosting.Controllers
 
                     ViewBag.AvailabilityId = new SelectList(availabilityListEx, "Id", "Name", cVApplication.AvailabilityId);
                     ViewBag.PlaceId = new SelectList(placeListEx, "Id", "Name", cVApplication.PlaceId);
-                    return View(cVApplication);
+                    return View(createCVApplicationViewModel);
                 }
             }
 
@@ -116,7 +120,7 @@ namespace CVHosting.Controllers
 
             ViewBag.AvailabilityId = new SelectList(availabilityList, "Id", "Name", cVApplication.AvailabilityId);
             ViewBag.PlaceId = new SelectList(placeList, "Id", "Name", cVApplication.PlaceId);
-            return View(cVApplication);
+            return View(createCVApplicationViewModel);
         }
 
 
