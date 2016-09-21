@@ -15,9 +15,8 @@ namespace Repository.IRepo
         void UpdateCVApplication(CVApplication app);
         void DeleteCVApplication(int id);
 
-
         CVFile GetCVFileById(int id);
-
+        int AddCVFile(CVFile cvFile);
 
         void SaveChanges();
     }

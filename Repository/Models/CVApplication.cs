@@ -13,17 +13,17 @@ namespace Repository.Models
 
         [Display(Name = "Stanowisko pracy:")]
         [MaxLength(72)]
-        [Required]
+        [Required(ErrorMessage = "Uzupełnij stanowisko")]
         public string Workplace { get; set; }
 
         [Display(Name = "Imię i Nazwisko:")]
         [MaxLength(72)]
-        [Required]
+        [Required(ErrorMessage = "Podaj Imie i Nazwisko")]
         public string Name { get; set; }
 
         [Display(Name = "Email")]
-        [EmailAddress]
-        [Required]
+        [EmailAddress(ErrorMessage = "Podaj właściwy e-mail")]
+        [Required(ErrorMessage = "Podaj e-mail do kontaktu")]
         public string Email { get; set; }
 
         [Display(Name = "Telefon")]
@@ -41,7 +41,10 @@ namespace Repository.Models
 
         public int? CVFileId { get; set; }
 
+        [Display(Name = "Skąd się o nas dowiedziałeś?")]
         public int PlaceId { get; set; }
+
+        [Display(Name = "Twoja dostępność?")]
         public int AvailabilityId { get; set; }
 
         public virtual Place Place { get; set; }

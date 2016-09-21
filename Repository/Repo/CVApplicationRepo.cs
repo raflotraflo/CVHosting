@@ -22,6 +22,12 @@ namespace Repository.Repo
             _db.CVApplication.Add(app);
         }
 
+        public int AddCVFile(CVFile cvFile)
+        {
+            _db.Entry(cvFile).GetDatabaseValues();
+            return cvFile.Id;
+        }
+
         public void DeleteCVApplication(int id)
         {
             //TODO rch - uusunąć plik z bazy 
