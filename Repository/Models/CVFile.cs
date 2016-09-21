@@ -11,8 +11,10 @@ namespace Repository.Models
         [Display(Name = "ID:")]
         public int Id { get; set; }
 
-        [Display(Name = "cv plik")]
-        [Required]
+        public string FileName { get; set; }
+        public string ContentType { get; set; }
+        public int ContentLength { get; set; }
         public byte[] Content { get; set; }
+
     }
 }
