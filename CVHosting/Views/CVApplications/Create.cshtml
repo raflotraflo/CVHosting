@@ -1,7 +1,11 @@
 ﻿@model Repository.Models.Views.CreateCVApplicationViewModel
+
+@*//te pliki powinny być ładowane z @Scripts.Render("~/bundles/jquery")*@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-@*<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">*@
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+
 @{
     ViewBag.Title = "Dodaj swoją aplikacje na stanowisko - metaTitle - do 60 znaków";
     ViewBag.Opis = "Dodaj swoją aplikacje na stanowisko";
@@ -76,13 +80,6 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.Label("Załącz plik", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                    <input class="btn btn-default" type="file" name="@Html.NameFor(x => x.File)" id="@Html.IdFor(x => x.File)" />
-                    @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
         <div class="form-group">
             @Html.Label("Załącz plik", new { @class = "control-label col-md-2" })
@@ -125,11 +122,6 @@
                 @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-warning" })
             </div>
 
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-                @Scripts.Render("~/bundles/jquery")
-                @Scripts.Render("~/ bundles / bootstrap")
-            }
 
 
 <script>
