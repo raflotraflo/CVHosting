@@ -23,7 +23,7 @@
             @Html.DisplayNameFor(model => model.DataDodania)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CVFileId)
+            Pobierz
         </th>
         <th></th>
     </tr>
@@ -41,11 +41,10 @@
             @Html.DisplayFor(modelItem => item.DataDodania)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CVFileId)
-            @Html.ActionLink("Pobierz", "DownloadCVFile", new { id = 3 });
+            @Html.ActionLink("Pobierz", "DownloadCVFile", new { id = item.CVFileId }, new { @class = "btn btn-primary" })
         </td>
         <td>
-            @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) |
             @*@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))*@
             @if (User.Identity.IsAuthenticated)
                 {

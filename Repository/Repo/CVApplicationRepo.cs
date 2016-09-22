@@ -24,7 +24,10 @@ namespace Repository.Repo
 
         public int AddCVFile(CVFile cvFile)
         {
-            _db.Entry(cvFile).GetDatabaseValues();
+
+            _db.CVFile.Add(cvFile);
+            _db.SaveChanges();
+
             return cvFile.Id;
         }
 

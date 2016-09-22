@@ -46,6 +46,8 @@ namespace Repository.Models
             //    .WithMany(x => x.Ogloszenia)
             //    .HasForeignKey(x => x.UzytkownikId)
             //    .WillCascadeOnDelete(true);
+
+            //modelBuilder.Entity<CVApplication>().Ignore(e => e.CVFile);
         }
     }
 }

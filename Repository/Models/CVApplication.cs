@@ -49,5 +49,6 @@ namespace Repository.Models
 
         public virtual Place Place { get; set; }
         public virtual Availability Availability { get; set; }
+        //public virtual CVFile CVFile { get; set; }
     }
 }
