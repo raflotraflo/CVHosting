@@ -51,7 +51,21 @@ namespace Repository.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Content = c.Binary(nullable: false),
+                        FileName = c.String(),
+                        ContentType = c.String(),
+                        ContentLength = c.Int(nullable: false),
+                        Content = c.Binary(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.MessageLog",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Type = c.String(maxLength: 10),
+                        Excepction = c.String(),
+                        Path = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -150,6 +164,7 @@ namespace Repository.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.MessageLog");
             DropTable("dbo.CVFile");
             DropTable("dbo.Place");
             DropTable("dbo.CVApplication");
