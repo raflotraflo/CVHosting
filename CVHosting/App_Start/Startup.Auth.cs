@@ -58,11 +58,11 @@ namespace CVHosting
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "148759686302-ib0qbrjmneq4boj5tcaqnh3cj8s7ic0g.apps.googleusercontent.com",
+                ClientSecret = "9TUCNcvGdsbPDnAUhPDH3JB7"
+            });
         }
     }
 }

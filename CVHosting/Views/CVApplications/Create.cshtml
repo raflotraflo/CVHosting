@@ -1,5 +1,7 @@
 ﻿@model Repository.Models.Views.CreateCVApplicationViewModel
-
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@*<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">*@
 @{
     ViewBag.Title = "Dodaj swoją aplikacje na stanowisko - metaTitle - do 60 znaków";
     ViewBag.Opis = "Dodaj swoją aplikacje na stanowisko";
@@ -74,13 +76,30 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.Label("Załącz plik", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                     <input class="btn btn-default" type="file" name="@Html.NameFor(x => x.File)" id="@Html.IdFor(x => x.File)" />
                     @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.Label("Załącz plik", new { @class = "control-label col-md-2" })
+            
+                <div class="input-group">
+                    <label class="input-group-btn">
+                        <span class="btn btn-primary">
+                            Browse&hellip; <input type="file" style="display: none;" name="@Html.NameFor(x => x.File)" id="@Html.IdFor(x => x.File)">
+                        </span>
+                    </label>
+                    <input type="text" class="form-control" readonly>
+                </div>
+                <span class="help-block">
+                    @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+                </span>
+                
+            </div>
 
         @*<div class="form-group">
             @Html.Label("Zgoda", new { @class = "control-label col-md-2" })
@@ -108,18 +127,37 @@
 
             @section Scripts {
                 @Scripts.Render("~/bundles/jqueryval")
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/ bundles / bootstrap")
             }
 
+
 <script>
-			// extend jquery range validator to work for required checkboxes
-			var defaultRangeValidator = $.validator.methods.range;
-			$.validator.methods.range = function(value, element, param) {
-				if(element.type === 'checkbox') {
-					// if it's a checkbox return true if it is checked
-					return element.checked;
-				} else {
-					// otherwise run the default validation function
-					return defaultRangeValidator.call(this, value, element, param);
-				}
-			}
+    $(function () {
+
+        // We can attach the `fileselect` event to all file inputs on the page
+        $(document).on('change', ':file', function () {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        // We can watch for our custom `fileselect` event like this
+        $(document).ready(function () {
+            $(':file').on('fileselect', function (event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
+                }
+
+            });
+        });
+
+    });
 </script>

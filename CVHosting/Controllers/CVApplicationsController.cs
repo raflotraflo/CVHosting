@@ -30,6 +30,7 @@ namespace CVHosting.Controllers
         }
 
         // GET: CVApplications
+        [Authorize]
         public ActionResult Index(int? page, string sortOrder)
         {
             int currentPage = page ?? 1;
@@ -73,6 +74,7 @@ namespace CVHosting.Controllers
         }
 
         // GET: CVApplications/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -159,38 +161,6 @@ namespace CVHosting.Controllers
             return View(createCVApplicationViewModel);
         }
 
-
-        //public ActionResult Create([Bind(Include = "Id,Workplace,Name,Email,Phone,Description,DataDodania,CVFileId,PlaceId,AvailabilityId")] CVApplication cVApplication)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _cvApplicationsRepo.AddCVApplication(cVApplication);
-        //            _cvApplicationsRepo.SaveChanges();
-        //            return RedirectToAction("Index");
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            _logger.FatalFormat(ex, "Error in create CVAplication");
-
-        //            var availabilityListEx = _availabilityRepo.GetAllAvailability().ToList();
-        //            var placeListEx = _placeRepo.GetAllPlace().ToList();
-
-        //            ViewBag.AvailabilityId = new SelectList(availabilityListEx, "Id", "Name", cVApplication.AvailabilityId);
-        //            ViewBag.PlaceId = new SelectList(placeListEx, "Id", "Name", cVApplication.PlaceId);
-        //            return View(cVApplication);
-        //        }
-        //    }
-
-        //    var availabilityList = _availabilityRepo.GetAllAvailability().ToList();
-        //    var placeList = _placeRepo.GetAllPlace().ToList();
-
-        //    ViewBag.AvailabilityId = new SelectList(availabilityList, "Id", "Name", cVApplication.AvailabilityId);
-        //    ViewBag.PlaceId = new SelectList(placeList, "Id", "Name", cVApplication.PlaceId);
-        //    return View(cVApplication);
-        //}
-
         // GET: CVApplications/Edit/5
         [Authorize]
         public ActionResult Edit(int? id)
@@ -242,6 +212,7 @@ namespace CVHosting.Controllers
         }
 
         // GET: CVApplications/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id, bool? error)
         {
             if (id == null)
@@ -261,6 +232,7 @@ namespace CVHosting.Controllers
         }
 
         // POST: CVApplications/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -279,6 +251,7 @@ namespace CVHosting.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult DownloadCVFile(int id)
         {
             CVFile cvFile = _cvApplicationsRepo.GetCVFileById(id);

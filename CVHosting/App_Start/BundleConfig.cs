@@ -30,6 +30,8 @@ namespace CVHosting
             bundles.Add(new StyleBundle("~/Content/exampleCVstyleCSS").Include(
                      "~/Content/exampleCVstyle.css",
                      "~/Content/exampleCVstyle.css"));
+
+
         }
     }
 }
