@@ -11,6 +11,7 @@ using Repository.IRepo;
 using Repository.Logging;
 using Repository.Models.Views;
 using PagedList;
+using System.Net.Mail;
 
 namespace CVHosting.Controllers
 {
@@ -137,6 +138,14 @@ namespace CVHosting.Controllers
 
                         _cvApplicationsRepo.AddCVApplication(cVApplication);
                         _cvApplicationsRepo.SaveChanges();
+
+                        cVApplication.Availability = _availabilityRepo.GetAvailabilityBuId(cVApplication.AvailabilityId);
+                        cVApplication.Place = _placeRepo.GetPlaceBuId(cVApplication.PlaceId);
+                        
+                        //TODO
+                        //send email and reurn site 
+
+                        SendEmail(cVApplication.Email, cVApplication);
                         return RedirectToAction("Index");
                     }
                 }
@@ -258,6 +267,59 @@ namespace CVHosting.Controllers
 
             byte[] contents = cvFile.Content;
             return File(contents, cvFile.ContentType, cvFile.FileName);
+        }
+
+        private bool SendEmail(string receiverName, CVApplication cv)
+        {
+
+            string body = CreateMailText(cv);
+
+            bool result = true;
+            try
+            {
+                MailMessage mail = new MailMessage("headchanne.cvhosting@gmail.com", receiverName, "Zgłoszenie aplikacji", body);
+                mail.IsBodyHtml = true;
+                SmtpClient client = new SmtpClient();
+                client.Port = 587;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.EnableSsl = true;
+                client.Host = "smtp.gmail.com";
+                client.Credentials = new NetworkCredential("headchanne.cvhosting@gmail.com", "headchanne1");
+                client.Send(mail);
+                _logger.InfoFormat("Email sended to {0}", mail.To);
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("Error while sending email to {0}: {1}", receiverName, ex.ToString());
+                result = false;
+            }
+            return result;
+        }
+
+        private string CreateMailText(CVApplication cv)
+        {
+           string txt = String.Format( "<!DOCTYPE html><html><head><meta charset='utf - 8' /><h2>Dziękujęmy za Twoją aplikacje</h2><div><h4>Szczegóły:</h4><hr />"
+           + "<dl class='dl-horizontal'>"
+        + "<dt>Dyspozycyjność</dt> <dd>{0}</dd>"
+
+       + " <dt> Skąd wiesz o HC?</dt> <dd>{1}</dd>"
+
+       + " <dt>Stanowisko pracy:</dt><dd>{2}</dd>"
+
+      + "  <dt>Imię i Nazwisko:</dt><dd>{3}</dd>"
+
+      + "  <dt>Email</dt><dd><a href =mailto:{4}> {4}</a></dd>"
+
+      + "  <dt>Telefon</dt><dd>{5}</dd>"
+
+     + "   <dt>Dodatkowe informacje:</dt><dd>{6}</dd>"
+
+     + "   <dt> Data dodania:</dt> <dd>{7}</dd>"
+
+   + " </dl></div><hr /><footer><p>&copy; 2016 - CV hosting Application</p></footer></div></body></html>", cv.Availability.Name, cv.Place.Name, cv.Workplace, cv.Name, cv.Email, cv.Phone, cv.Description, cv.DataDodania);
+
+            return txt;
         }
     }
 }

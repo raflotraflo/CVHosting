@@ -20,8 +20,8 @@ namespace Repository.Models.Views
         [Attachment]
         public HttpPostedFileBase File { get; set; }
 
-        //[MustBeTrue(ErrorMessage = "You gotta tick the box!")]
-        //public bool Consent { get; set; }
+        [MustBeTrue(ErrorMessage = "Musisz wyrazić zgodę!")]
+        public bool Consent { get; set; }
     }
 
     [AttributeUsage(AttributeTargets.Property)]
