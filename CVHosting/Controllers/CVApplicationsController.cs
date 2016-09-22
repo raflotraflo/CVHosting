@@ -55,22 +55,12 @@ namespace CVHosting.Controllers
         // GET: CVApplications/Create
         public ActionResult Create()
         {
-            try
-            {
-                var availabilityList = _availabilityRepo.GetAllAvailability().ToList();
-                var placeList = _placeRepo.GetAllPlace().ToList();
+            var availabilityList = _availabilityRepo.GetAllAvailability().ToList();
+            var placeList = _placeRepo.GetAllPlace().ToList();
 
-                //ViewBag.AvailabilityId = new SelectList(db.Availability, "Id", "Name");
-                //ViewBag.PlaceId = new SelectList(db.Place, "Id", "Name");
+            ViewBag.AvailabilityId = new SelectList(availabilityList, "Id", "Name");
+            ViewBag.PlaceId = new SelectList(placeList, "Id", "Name");
 
-
-                ViewBag.AvailabilityId = new SelectList(availabilityList, "Id", "Name");
-                ViewBag.PlaceId = new SelectList(placeList, "Id", "Name");
-            }
-            catch(Exception e)
-            {
-                ;
-            }
             return View();
         }
 
@@ -101,7 +91,7 @@ namespace CVHosting.Controllers
                             file.Content = reader.ReadBytes(upload.ContentLength);
                         }
 
-                          int fileID = _cvApplicationsRepo.AddCVFile(file);
+                        int fileID = _cvApplicationsRepo.AddCVFile(file);
 
                         cVApplication.CVFileId = fileID;
 
@@ -111,7 +101,7 @@ namespace CVHosting.Controllers
                         _cvApplicationsRepo.AddCVApplication(cVApplication);
                         _cvApplicationsRepo.SaveChanges();
                         return RedirectToAction("Index");
-                    } 
+                    }
                 }
                 catch (Exception ex)
                 {
