@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Repository.Models.CVApplication>
+﻿@model PagedList.IPagedList<Repository.Models.CVApplication>
+@using PagedList.Mvc;
+@Styles.Render("~/Content/PagedList")
 
 @{
     ViewBag.Title = "Lista Aplikacji - metaTitle - do 60 znaków";
@@ -14,13 +16,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink("Imie i Nazwisko", "Index", new { sortOrder = ViewBag.NameSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Workplace)
+            @Html.ActionLink("Stanowisko", "Index", new { sortOrder = ViewBag.WorkplaceSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DataDodania)
+            @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DateTimeSort })
         </th>
         <th>
             Pobierz
@@ -59,3 +61,9 @@
 }
 
 </table>
+
+<div>
+    <br />
+    Strona @(Model.PageCount < Model.PageCount ? 0 : Model.PageNumber) z @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))
+</div>
