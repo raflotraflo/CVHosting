@@ -111,7 +111,7 @@ namespace Repository.Migrations
                         Name = c.String(),
                         Surname = c.String(),
                         Age = c.Int(),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
+                        Discriminator = c.String(nullable: true, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");

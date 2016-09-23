@@ -177,17 +177,8 @@
     <EmbeddedResource Include="Files\CV_RAFAL_CHODZIDLO_ENG.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609220810446_start.resx">
-      <DependentUpon>201609220810446_start.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609221009595_addFile.resx">
-      <DependentUpon>201609221009595_addFile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609221029593_1.resx">
-      <DependentUpon>201609221029593_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609221036072_poprawka.resx">
-      <DependentUpon>201609221036072_poprawka.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609230747240_start.resx">
+      <DependentUpon>201609230747240_start.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -210,21 +201,9 @@
     <Compile Include="Logging\CommonLogger.cs" />
     <Compile Include="Logging\DatabaseLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Migrations\201609220810446_start.cs" />
-    <Compile Include="Migrations\201609220810446_start.Designer.cs">
-      <DependentUpon>201609220810446_start.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609221009595_addFile.cs" />
-    <Compile Include="Migrations\201609221009595_addFile.Designer.cs">
-      <DependentUpon>201609221009595_addFile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609221029593_1.cs" />
-    <Compile Include="Migrations\201609221029593_1.Designer.cs">
-      <DependentUpon>201609221029593_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609221036072_poprawka.cs" />
-    <Compile Include="Migrations\201609221036072_poprawka.Designer.cs">
-      <DependentUpon>201609221036072_poprawka.cs</DependentUpon>
+    <Compile Include="Migrations\201609230747240_start.cs" />
+    <Compile Include="Migrations\201609230747240_start.Designer.cs">
+      <DependentUpon>201609230747240_start.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Availability.cs" />
