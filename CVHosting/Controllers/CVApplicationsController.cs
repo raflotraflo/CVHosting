@@ -146,7 +146,7 @@ namespace CVHosting.Controllers
                         //send email and reurn site 
 
                         SendEmail(cVApplication.Email, cVApplication);
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Confirmation", new { id = cVApplication.Id });
                     }
                 }
                 catch (Exception ex)
@@ -169,6 +169,18 @@ namespace CVHosting.Controllers
             ViewBag.PlaceId = new SelectList(placeList, "Id", "Name", cVApplication.PlaceId);
             return View(createCVApplicationViewModel);
         }
+        
+        //Confirmation
+        public ActionResult Confirmation(int id)
+        {
+            CVApplication cVApplication = _cvApplicationsRepo.GetCVApplicationById(id);
+            if (cVApplication == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cVApplication);
+        }
+
 
         // GET: CVApplications/Edit/5
         [Authorize]

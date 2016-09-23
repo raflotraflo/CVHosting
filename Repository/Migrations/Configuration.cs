@@ -160,15 +160,15 @@ namespace Repository.Migrations
             context.SaveChanges();
         }
 
-        public static Stream GetResourceFileStream(String nameSpace, String filePath)
+        #region extensions
+        private static Stream GetResourceFileStream(String nameSpace, String filePath)
         {
-            //TODO rch zmienić to na extensions
             String pseduoName = filePath.Replace('\\', '.');
             Assembly assembly = Assembly.GetExecutingAssembly();
             return assembly.GetManifestResourceStream(nameSpace + "." + pseduoName);
         }
 
-        public static byte[] ReadToEnd(System.IO.Stream stream)
+        private static byte[] ReadToEnd(System.IO.Stream stream)
         {
             long originalPosition = 0;
 
@@ -219,6 +219,8 @@ namespace Repository.Migrations
                 }
             }
         }
+
+        #endregion
 
     }
 }

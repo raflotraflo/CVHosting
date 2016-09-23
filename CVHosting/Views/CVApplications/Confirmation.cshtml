@@ -1,0 +1,85 @@
+﻿@model Repository.Models.CVApplication
+
+@{
+    ViewBag.Title = "Szczegóły Aplikacji nr: " + Model.Id;
+    ViewBag.Opis = "Szczegóły Aplikacji nr: " + Model.Id + "Opis dla Google";
+    ViewBag.SlowaKluczowe = "Szczegóły Aplikacji, słowa kluczowe, keywords";
+}
+
+<h2>Twoja aplikacja zostala przyjęta</h2>
+
+<div>
+    <h4>Szczegóły:</h4>
+    <hr />
+    <h5>Na twojego maila zostało wysłane potwierdzenie</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Availability.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Availability.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Place.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Place.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Workplace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workplace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDodania)
+        </dt>
+
+        <dd>
+            @Model.DataDodania.ToString()
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Powrót do listy", "Index", null, new { @class = "btn btn-success" })
+</p>

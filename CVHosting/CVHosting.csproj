@@ -321,6 +321,7 @@
     <Content Include="Views\CVApplications\Details.cshtml" />
     <Content Include="Views\CVApplications\Edit.cshtml" />
     <Content Include="Views\CVApplications\Index.cshtml" />
+    <Content Include="Views\CVApplications\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

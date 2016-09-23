@@ -33,9 +33,11 @@ namespace Repository.Repo
 
         public void DeleteCVApplication(int id)
         {
-            //TODO rch - uusunąć plik z bazy 
+         
             var toDelete = _db.CVApplication.Find(id);
+            var toDeleteFile = _db.CVFile.Find(toDelete.CVFileId);
             _db.CVApplication.Remove(toDelete);
+            _db.CVFile.Remove(toDeleteFile);
         }
 
         public IQueryable<CVApplication> GetAllCVs()
